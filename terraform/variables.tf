@@ -14,3 +14,15 @@ variable "resource_group_name" {
   type        = string
   default     = "rg-cicd-project"
 }
+
+variable "admin_username" {
+  description = "Linux admin user on the VMs"
+  type        = string
+  default     = "azureuser"
+}
+
+variable "ssh_public_key_path" {
+  description = "Path to your SSH public key"
+  type        = string
+  default     = "~/.ssh/cicd-key.pub"
+}
