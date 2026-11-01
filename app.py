@@ -14,6 +14,7 @@ def home():
     <h1>Hello from the CI/CD Pipeline!</h1>
     <p>Version: {APP_VERSION}</p>
     <p>Served by: {socket.gethostname()}</p>
+    <p>Deployed automatically by Jenkins 🤖</p>
     """
 
 
