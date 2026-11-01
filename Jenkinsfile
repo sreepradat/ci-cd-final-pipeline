@@ -29,7 +29,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'docker run --rm $IMAGE_NAME:$IMAGE_TAG python -m pytest -v'
+                sh 'docker run --rm $IMAGE_NAME:$IMAGE_TAG python -m pytest -v -p no:cacheprovider'
             }
         }
 
@@ -48,11 +48,18 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh 'ansible-playbook --syntax-check -i ansible/inventory.ini ansible/deploy.yml'
+                sh 'ansible-playbook -i ansible/inventory.ini ansible/deploy.yml -e image_tag=$IMAGE_TAG'
+            }
+        }
     }
 
     post {
         success {
-            echo "✅ Pushed ${IMAGE_NAME}:${IMAGE_TAG} to Docker Hub"
+            echo "✅ Deployed ${IMAGE_NAME}:${IMAGE_TAG} → http://20.219.3.232"
         }
         failure {
             echo "❌ Pipeline failed. Check the stage logs above."
