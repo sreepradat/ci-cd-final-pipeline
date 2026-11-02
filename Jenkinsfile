@@ -59,7 +59,7 @@ pipeline {
 
     post {
         success {
-            echo "✅ Deployed ${IMAGE_NAME}:${IMAGE_TAG} → http://20.219.3.232"
+            echo "✅ Deployed ${IMAGE_NAME}:${IMAGE_TAG}"
         }
         failure {
             echo "❌ Pipeline failed. Check the stage logs above."
